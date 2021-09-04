@@ -1,13 +1,13 @@
 // Sigma: the sum of a sequence of arithmetic expressions. 
 // === iterative solution ===
-function sigma(operation, start, end) {
-    if (start > end) {
+function sigma(operation, start, stop) {
+    if (start > stop) {
         return 0;
     }
-    const range = [];
-    while (start <= end) {
-        range.push(start);
-        start += 1;
+    let sum = 0;
+    let value = start;
+    for (value; value <= stop; value += 1) {
+        sum += operation(value);
     }
-    return range.reduce((sum, value) => sum + operation(value));
-} 
+    return sum;
+}
