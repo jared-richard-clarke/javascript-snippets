@@ -1,25 +1,28 @@
 const conditionals = (function () {
-  const truth_table = new Map([
+  const edge_cases = new Map([
     [0, true],
+    [-0, false],
+    [Number.POSITIVE_INFINITY, false],
+    [Number.NEGATIVE_INFINITY, false],
+    [NaN, false],
     ["", true],
     [/s+/g, true],
-    [NaN, false],
     [undefined, false],
     [null, false]
   ]);
   // and(...expressions) -> boolean
   function and(...expressions) {
     return expressions.every((value) => {
-      return truth_table.has(value) ? truth_table.get(value) : value;
+      return edge_cases.has(value) ? edge_cases.get(value) : value;
     });
   }
   // or(...expressions) -> boolean
   function or(...expressions) {
     return expressions.some((value) => {
-      return truth_table.has(value) ? truth_table.get(value) : value;
+      return edge_cases.has(value) ? edge_cases.get(value) : value;
     });
   }
-  // interface: const { and, or } = conditionals;
+  // interface: const { and, or } = conditionals; 
   return Object.freeze({
     and,
     or
